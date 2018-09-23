@@ -7,9 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitcoinApi.WebApi", "Bitcoi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitcoinApi.Business", "BitcoinApi.Business\BitcoinApi.Business.csproj", "{80874FEC-7A92-4D8B-A2C2-EF55E08B3A25}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sql", ".sql", "{3FF1F667-D10D-4F63-A88C-14DE136E1578}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{3FF1F667-D10D-4F63-A88C-14DE136E1578}"
 	ProjectSection(SolutionItems) = preProject
 		.sql\CreateDatabase.sql = .sql\CreateDatabase.sql
+		.\README.md = .\README.md
 	EndProjectSection
 EndProject
 Global
