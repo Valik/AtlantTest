@@ -142,7 +142,7 @@ N'http://127.0.0.1:8333',   -- BitcoindServerAddress
 N'user',                    -- BitcoindUser
 N'pwd',                     -- BitcoindPassword
 0,                          -- Balance will be updated during GetLast api call. 
-NULL                       -- WalletPassphrase, leave NULL if it does not exist
+NULL                        -- WalletPassphrase, leave NULL if it does not exist
 )
 
 /* 
