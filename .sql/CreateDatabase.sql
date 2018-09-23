@@ -81,9 +81,9 @@ BEGIN
     FROM @transactions [source]
     WHERE dbo.tbl_Transaction.Id = [source].Id AND dbo.tbl_Transaction.WalletId = @walletId
 
-    UPDATE dbo.tbl_Wallet SET Balance =
+    UPDATE dbo.tbl_Wallet SET Balance = ISNULL(
         (SELECT SUM(Amount + IIF(Fee is NULL, 0, Fee)) -- for send transactions Amount, Fee are negative
-         FROM dbo.tbl_Transaction WHERE WalletId = @walletId)
+         FROM dbo.tbl_Transaction WHERE WalletId = @walletId), 0)
     WHERE Id = @walletId
 END
 GO
