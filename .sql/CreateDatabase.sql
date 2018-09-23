@@ -22,7 +22,7 @@ CREATE TABLE dbo.tbl_Transaction (
     CONSTRAINT PK_tbl_Transaction PRIMARY KEY CLUSTERED (Id),
     CONSTRAINT FK_tbl_Transaction_WalletId FOREIGN KEY (WalletId) REFERENCES dbo.tbl_Wallet (id),
     CONSTRAINT CH_tbl_Transaction_Fee_Category CHECK ((Category = 0 AND Fee = 0 AND Amount >= 0) OR (Category = 1  AND Amount <= 0 AND Fee <= 0)),
-    CONSTRAINT UQ_tbl_Transaction_TxId UNIQUE(TxId, WalletId)
+    CONSTRAINT UQ_tbl_Transaction_TxId UNIQUE(WalletId, TxId, Category)
 )
 GO
 

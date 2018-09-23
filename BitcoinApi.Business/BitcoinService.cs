@@ -170,8 +170,8 @@ namespace BitcoinApi.Business
                 return (false, transactionsApiResult.Error);
             }
 
-            var transactionsFromApi = transactionsApiResult.Result.ToDictionary(x => x.TxId, x => x, StringComparer.InvariantCulture);
-            var transactionsFromDb = DataAccessService.GetTransactions(wallet.Id).ToDictionary(x => x.TxId, x => x, StringComparer.InvariantCulture);
+            var transactionsFromApi = transactionsApiResult.Result.ToDictionary(x => GetKey(x.TxId, IsSend(x.Category)), x => x, StringComparer.InvariantCulture);
+            var transactionsFromDb = DataAccessService.GetTransactions(wallet.Id).ToDictionary(x => GetKey(x.TxId, x.Category), x => x, StringComparer.InvariantCulture);
 
             var transactionsToInsertOrUpdate = new List<DbTransactionParam>(transactionsFromApi.Count);
 
@@ -189,6 +189,11 @@ namespace BitcoinApi.Business
             }
 
             return (true, string.Empty);
+
+            string GetKey(string txId, bool send)
+            {
+                return $"{txId}_{(send ? 1 : 0)}";
+            }
         }
 
         private async Task<BitcoinApiResult<ApiTransaction[]>> FetchTransactions(DbWallet wallet)
@@ -268,7 +273,7 @@ namespace BitcoinApi.Business
                     Confirmations = from.Confirmations,
                     Address = from.Address,
                     Amount = from.Amount,
-                    Category = from.Category.Equals("send", StringComparison.InvariantCultureIgnoreCase),
+                    Category = IsSend(from.Category),
                     Fee = from.Fee,
                     ReceivedDateTime = ToDateTime(from.TimeReceived),  
                 };
@@ -292,6 +297,11 @@ namespace BitcoinApi.Business
                     confirmationsFromDb <= 6 &&
                     confirmationsFromDb != sourceTransaction.Value.Confirmations;
             }
+        }
+
+        private static bool IsSend(string transactionCategory)
+        {
+            return transactionCategory.Equals("send", StringComparison.InvariantCultureIgnoreCase);
         }
 
         private (string bitcoindAddress, string user, string password) ToRequestParams(DbWallet wallet)
