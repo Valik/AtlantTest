@@ -10,7 +10,7 @@
 
 ### API
 
-* GET:  /api/getLast
+* GET:  /api/getlast
 * POST: /api/sendbtc
   * POST BODY: 
 ```json
