@@ -4,7 +4,7 @@
 ### Setup
 * Create empty database
 * Configure connection string in Web.config to this database
-* Open CreateDatabase.sql and scroll to the bottom of script
-* Fill Wallet's details according to comments
+* Open CreateDatabase.sql and scroll to the bottom of the script (physical path: .sql\CreateDatabase.sql)
+* Fill Wallet's details according to comments and run script on created database
 * Run applictaion using IIS
 
